@@ -1,0 +1,39 @@
+{
+  "name": "vku-facility-audit",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "cap:sync": "cap sync android",
+    "cap:copy": "cap copy android",
+    "cap:open": "cap open android",
+    "build:apk": "npm run build && cap sync android && cd android && JAVA_HOME=$(pwd)/../tools/jdk17 ANDROID_HOME=$(pwd)/../tools/android-sdk ./gradlew assembleDebug && cd .. && mkdir -p dist-apk && cp android/app/build/outputs/apk/debug/app-debug.apk dist-apk/vku-facility-audit-debug.apk"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/camera": "^6.1.2",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/network": "^6.0.3",
+    "canvas-confetti": "^1.9.4",
+    "idb": "^8.0.2",
+    "lucide-react": "^1.16.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1"
+  }
+}
