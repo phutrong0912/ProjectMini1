@@ -152,6 +152,74 @@ adb install dist-apk/vku-facility-audit-debug.apk
 
 ---
 
+## 🌐 Hướng Dẫn Triển Khai Live Demo Trực Tuyến
+
+Dự án đã được cấu hình sẵn sàng 100% để deploy lên bất kỳ nền tảng lưu trữ tĩnh & serverless nào với đầy đủ hỗ trợ routing SPA, PWA Manifest và Service Worker:
+
+### 1. 🐙 GitHub Pages (Tự động qua GitHub Actions)
+Dự án đã tích hợp sẵn workflow tự động build và deploy trong [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+- **Bước 1**: Đẩy code lên GitHub:
+  ```bash
+  git add .
+  git commit -m "feat: setup live demo deployment configs"
+  git push origin main
+  ```
+- **Bước 2**: Trên giao diện GitHub của repository (`https://github.com/phutrong0912/ProjectMini1`):
+  1. Vào **Settings** -> mục **Pages** (cột bên trái).
+  2. Tại **Build and deployment** -> **Source**, chọn **GitHub Actions**.
+- **Bước 3**: Workflow sẽ tự động chạy trong tab **Actions** và cung cấp Live URL tại:
+  👉 **`https://phutrong0912.github.io/ProjectMini1/`**
+
+---
+
+### 2. ⚡ Cloudflare Pages (Khuyên dùng - Cực nhanh & Ổn định)
+Dự án đã có file [`public/_redirects`](public/_redirects) để xử lý định tuyến SPA trên Cloudflare Pages:
+- **Cách 1: Kết nối trực tiếp với GitHub (Khuyên dùng)**
+  1. Đăng nhập vào [Cloudflare Dashboard](https://dash.cloudflare.com/).
+  2. Chọn mục **Workers & Pages** -> Nhấn **Create application** -> Chọn tab **Pages** -> Nhấn **Connect to Git**.
+  3. Chọn repository **`phutrong0912/ProjectMini1`**.
+  4. Cấu hình thông số build:
+     - **Framework preset**: `Vite`
+     - **Build command**: `npm run build`
+     - **Build output directory**: `dist`
+  5. Nhấn **Save and Deploy**. Cloudflare sẽ cung cấp URL dạng:  
+     👉 **`https://vku-facility-audit.pages.dev`**
+- **Cách 2: Triển khai trực tiếp qua Wrangler CLI**:
+  ```bash
+  npx wrangler pages deploy dist --project-name=vku-facility-audit
+  ```
+
+---
+
+### 3. ▲ Vercel
+Dự án đã bao gồm cấu hình tối ưu trong file [`vercel.json`](vercel.json):
+- **Cách 1: Kết nối qua giao diện Web (1 Click)**
+  1. Truy cập [vercel.com/new](https://vercel.com/new).
+  2. Chọn Import repository **`phutrong0912/ProjectMini1`**.
+  3. Giữ nguyên cấu hình mặc định (Framework: `Vite`, Output: `dist`).
+  4. Nhấn **Deploy**. Vercel sẽ tự động cung cấp Live URL dạng:  
+     👉 **`https://project-mini-1.vercel.app`**
+- **Cách 2: Triển khai qua Vercel CLI**:
+  ```bash
+  npx vercel --prod
+  ```
+
+---
+
+### 4. 💠 Netlify
+Dự án đã bao gồm cấu hình trong file [`netlify.toml`](netlify.toml):
+- **Cách 1: Kết nối qua giao diện Netlify**
+  1. Truy cập [app.netlify.com](https://app.netlify.com/) -> Nhấn **Add new site** -> **Import an existing project**.
+  2. Chọn **GitHub** và cấp quyền truy cập repository **`phutrong0912/ProjectMini1`**.
+  3. Nhấn **Deploy ProjectMini1**. Netlify sẽ build và cung cấp URL dạng:  
+     👉 **`https://vku-facility-audit.netlify.app`**
+- **Cách 2: Triển khai qua Netlify CLI**:
+  ```bash
+  npx netlify deploy --prod --dir=dist
+  ```
+
+---
+
 ## 🧪 Kịch Bản Kiểm Thử Ngoại Tuyến (Test Scenarios)
 
 ### Kịch bản 1: Kiểm thử Lưu nháp tự động khi mất điện / reload
